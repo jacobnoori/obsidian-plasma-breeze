@@ -169,8 +169,6 @@ body {
 .workspace-split.mod-left-split .workspace-tab-header-container,
 .workspace-split.mod-right-split .workspace-tab-header-container,
 .workspace-ribbon.mod-left::before,
-.titlebar,
-.titlebar-inner,
 .mod-macos .workspace-ribbon.mod-left::before {
   background-color: var(--breeze-titlebar) !important;
   border-color: var(--breeze-titlebar) !important;
@@ -228,10 +226,13 @@ body {
   color: var(--breeze-titlebar-text);
 }
 
-/* Window controls (hidden-frame mode on Linux / Windows) */
+/* Window controls (hidden-frame mode on Linux / Windows).
+   In this mode .titlebar is a transparent overlay above the tab bar, so it
+   must never get a background or it hides the tabs underneath. The colour
+   for the "Obsidian frame" style comes from the --titlebar-* variables. */
 .titlebar-button-container,
 .titlebar-button-container.mod-right {
-  background-color: var(--breeze-titlebar);
+  background-color: transparent;
 }
 
 .titlebar-button {
