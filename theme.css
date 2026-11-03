@@ -215,6 +215,25 @@ body {
   color: var(--breeze-text);
 }
 
+/* Sidebar tab icons sit on the dark strip, so every tab-text state there
+   (including "focused + active", used when you click into a sidebar) must
+   stay light. The main pane keeps dark text on its white active tab. */
+.workspace-split.mod-left-split .workspace-tab-header,
+.workspace-split.mod-right-split .workspace-tab-header {
+  --tab-text-color-active: var(--breeze-titlebar-text);
+  --tab-text-color-focused-active: var(--breeze-titlebar-text);
+  --tab-text-color-focused-active-current: var(--breeze-titlebar-text);
+  --icon-color-active: var(--breeze-titlebar-text);
+  --icon-color-focused: var(--breeze-titlebar-text);
+}
+
+.workspace-split.mod-left-split .workspace-tabs.mod-active .workspace-tab-header.is-active,
+.workspace-split.mod-right-split .workspace-tabs.mod-active .workspace-tab-header.is-active,
+.workspace-split.mod-left-split .workspace-tabs.mod-active .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
+.workspace-split.mod-right-split .workspace-tabs.mod-active .workspace-tab-header.is-active .workspace-tab-header-inner-icon {
+  color: var(--breeze-titlebar-text);
+}
+
 /* Sidebar tab icons: subtle highlight on the active one */
 .workspace-split.mod-left-split .workspace-tab-header.is-active .workspace-tab-header-inner,
 .workspace-split.mod-right-split .workspace-tab-header.is-active .workspace-tab-header-inner {
