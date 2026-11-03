@@ -141,10 +141,9 @@ body {
   --tab-text-color-focused-active-current: var(--breeze-text);
   --tab-outline-color: var(--breeze-titlebar);
   --tab-divider-color: rgba(252, 252, 252, 0.18);
-  /* No flared "feet" on the active tab: on the dark strip they read as
-     white overlapping the neighbouring tabs. Like Firefox, the active tab
-     just sits on the content with rounded top corners. */
+  /* Firefox-style tabs: no flared "feet", fully rounded corners. */
   --tab-curve: 0px;
+  --tab-radius-active: var(--radius-m);
 
   /* Status bar */
   --status-bar-background: var(--breeze-window);
@@ -200,9 +199,63 @@ body {
   border-color: var(--breeze-border);
 }
 
-/* Tabs keep Obsidian's default shape (rounded top, curved feet).
-   Only colours change: the strip stays Breeze title-bar grey and the
-   active tab is Breeze view white, like the active tab in Firefox. */
+/* Firefox-style tabs in the main pane: each tab is a rounded card floating
+   in the middle of the dark strip (4px gap above and below). The active
+   tab is white with a soft shadow; inactive tabs have no background, no
+   dividers and show their close button, like Firefox. */
+.workspace .mod-root .workspace-tab-header-container-inner {
+  margin: 0 -2px;
+  padding: 0 4px;
+  align-items: center;
+  gap: 2px;
+}
+
+.workspace .mod-root .workspace-tab-header {
+  align-self: center;
+  height: calc(var(--header-height) - 8px);
+  padding: 0;
+  border-radius: var(--radius-m);
+}
+
+.workspace .mod-root .workspace-tab-header::before,
+.workspace .mod-root .workspace-tab-header::after {
+  display: none;
+}
+
+.workspace .mod-root .workspace-tab-header-container .workspace-tab-header.is-active {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.workspace .mod-root .workspace-tab-header-container .workspace-tab-header:not(.is-active):hover {
+  background-color: rgba(252, 252, 252, 0.1);
+  box-shadow: none;
+}
+
+.workspace .mod-root .workspace-tab-header-inner {
+  padding-inline: 10px 4px;
+  border-radius: var(--radius-m);
+}
+
+.workspace .mod-root .workspace-tab-header-container .workspace-tab-header:not(.is-active):hover .workspace-tab-header-inner {
+  background-color: transparent;
+}
+
+/* No vertical dividers between tabs */
+.workspace .mod-root .workspace-tab-header-inner::after {
+  display: none;
+}
+
+/* Close button on every tab, not only on hover */
+.workspace .mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header:not(.is-active) .workspace-tab-header-inner-close-button {
+  display: flex;
+  color: var(--tab-text-color);
+}
+
+.workspace .mod-root .workspace-tab-header:not(.is-active) .workspace-tab-header-inner-close-button:hover {
+  color: var(--breeze-titlebar-text);
+  background-color: rgba(252, 252, 252, 0.12);
+}
+
 .workspace-split.mod-root .workspace-tab-header:not(.is-active) {
   --tab-text-color: color-mix(in srgb, var(--breeze-titlebar-text) 72%, transparent);
   --tab-text-color-focused: color-mix(in srgb, var(--breeze-titlebar-text) 85%, transparent);
