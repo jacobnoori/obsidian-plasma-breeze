@@ -119,6 +119,8 @@ body {
   --nav-item-background-hover: rgba(61, 174, 233, 0.14);
   --nav-item-background-active: var(--breeze-selection-soft);
   --nav-item-background-selected: var(--breeze-selection-soft);
+  --nav-item-color: var(--breeze-text);
+  --nav-item-color-hover: var(--breeze-text);
   --nav-item-color-active: var(--breeze-text);
   --nav-item-color-selected: var(--breeze-text);
 
@@ -139,6 +141,10 @@ body {
   --tab-text-color-focused-active-current: var(--breeze-text);
   --tab-outline-color: var(--breeze-titlebar);
   --tab-divider-color: rgba(252, 252, 252, 0.18);
+  /* No flared "feet" on the active tab: on the dark strip they read as
+     white overlapping the neighbouring tabs. Like Firefox, the active tab
+     just sits on the content with rounded top corners. */
+  --tab-curve: 0px;
 
   /* Status bar */
   --status-bar-background: var(--breeze-window);
@@ -271,6 +277,26 @@ body {
   background-color: var(--breeze-selection-soft);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--breeze-highlight) 55%, transparent);
   border-radius: var(--radius-s);
+}
+
+/* Readability: file tree, ribbon icons and empty-pane messages use full
+   Breeze text colour (like Dolphin) instead of the muted grey. The small
+   toolbar icons at the top of each sidebar pane keep the muted colour. */
+.nav-file-title,
+.nav-folder-title,
+.tree-item-self {
+  color: var(--breeze-text);
+}
+
+.workspace-ribbon .side-dock-ribbon-action,
+.workspace-ribbon .clickable-icon {
+  --icon-color: var(--breeze-text);
+  --icon-color-hover: var(--breeze-text);
+}
+
+.pane-empty,
+.search-empty-state {
+  color: var(--breeze-text);
 }
 
 /* ---------------------------------------------------------------- */
