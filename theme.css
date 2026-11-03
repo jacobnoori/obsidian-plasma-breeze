@@ -294,6 +294,20 @@ body {
   --icon-color-hover: var(--breeze-text);
 }
 
+/* The left sidebar toggle lives in the ribbon but sits on the dark top bar:
+   give it the same light icon colours as the right sidebar toggle. */
+.sidebar-toggle-button,
+.sidebar-toggle-button .clickable-icon,
+.workspace-ribbon .sidebar-toggle-button,
+.workspace-ribbon .sidebar-toggle-button.clickable-icon,
+.workspace-ribbon .sidebar-toggle-button .clickable-icon {
+  --icon-color: color-mix(in srgb, var(--breeze-titlebar-text) 75%, transparent);
+  --icon-color-hover: var(--breeze-titlebar-text);
+  --icon-color-active: var(--breeze-titlebar-text);
+  --icon-color-focused: var(--breeze-titlebar-text);
+  --background-modifier-hover: rgba(252, 252, 252, 0.12);
+}
+
 .pane-empty,
 .search-empty-state {
   color: var(--breeze-text);
