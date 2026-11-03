@@ -1,0 +1,336 @@
+/*
+ * Plasma Breeze — an Obsidian theme modelled on KDE Plasma's Breeze colour scheme.
+ *
+ * Layout mapping (light mode):
+ *   Top bar (tab headers across both sidebars + main area)  → Breeze title bar   #475057
+ *   Left & right sidebars, ribbon, status bar                → Breeze window bg   #eff0f1
+ *   Main content (editor / reading view)                     → Breeze view bg     #fcfcfc
+ */
+
+/* ---------------------------------------------------------------- */
+/* Palette                                                          */
+/* ---------------------------------------------------------------- */
+
+body {
+  /* Breeze (light) */
+  --breeze-titlebar: #475057;
+  --breeze-titlebar-text: #fcfcfc;
+  --breeze-window: #eff0f1;
+  --breeze-view: #fcfcfc;
+  --breeze-alt-view: #f7f7f7;
+  --breeze-text: #232629;
+  --breeze-text-inactive: #707d8a;
+  --breeze-border: #c6c8c9;
+  --breeze-highlight: #3daee9;
+  --breeze-selection-soft: #c2e0f5; /* Dolphin selected item */
+  --breeze-hover-soft: #dcedf8;
+  --breeze-link: #2980b9;
+  --breeze-visited: #9b59b6;
+  --breeze-negative: #da4453;
+  --breeze-neutral: #f67400;
+  --breeze-positive: #27ae60;
+
+  --font-interface-theme: "Noto Sans", "Inter", "Segoe UI", sans-serif;
+  --font-text-theme: "Noto Sans", "Inter", "Segoe UI", sans-serif;
+  --font-monospace-theme: "Hack", "Noto Sans Mono", "DejaVu Sans Mono", monospace;
+
+  --radius-s: 3px;
+  --radius-m: 5px;
+  --radius-l: 7px;
+  --radius-xl: 9px;
+
+  --accent-h: 200;
+  --accent-s: 80%;
+  --accent-l: 58%;
+}
+
+.theme-dark {
+  /* Breeze Dark */
+  --breeze-titlebar: #2a2e32;
+  --breeze-titlebar-text: #fcfcfc;
+  --breeze-window: #202326;
+  --breeze-view: #141618;
+  --breeze-alt-view: #1d1f22;
+  --breeze-text: #fcfcfc;
+  --breeze-text-inactive: #a1a9b1;
+  --breeze-border: #3b4045;
+  --breeze-selection-soft: #1f4a62;
+  --breeze-hover-soft: #1b3646;
+  --breeze-link: #1d99f3;
+  --breeze-visited: #9b59b6;
+}
+
+/* ---------------------------------------------------------------- */
+/* Core Obsidian variables                                          */
+/* ---------------------------------------------------------------- */
+
+.theme-light,
+.theme-dark {
+  --background-primary: var(--breeze-view);
+  --background-primary-alt: var(--breeze-alt-view);
+  --background-secondary: var(--breeze-window);
+  --background-secondary-alt: var(--breeze-window);
+
+  --background-modifier-border: var(--breeze-border);
+  --background-modifier-border-hover: var(--breeze-highlight);
+  --background-modifier-border-focus: var(--breeze-highlight);
+  --background-modifier-hover: rgba(61, 174, 233, 0.14);
+  --background-modifier-active-hover: rgba(61, 174, 233, 0.22);
+  --background-modifier-error: var(--breeze-negative);
+  --background-modifier-success: var(--breeze-positive);
+
+  --text-normal: var(--breeze-text);
+  --text-muted: var(--breeze-text-inactive);
+  --text-faint: color-mix(in srgb, var(--breeze-text-inactive) 70%, transparent);
+  --text-accent: var(--breeze-link);
+  --text-accent-hover: var(--breeze-highlight);
+  --text-on-accent: #fcfcfc;
+  --text-selection: rgba(61, 174, 233, 0.3);
+  --text-highlight-bg: rgba(246, 116, 0, 0.25);
+  --text-error: var(--breeze-negative);
+  --text-success: var(--breeze-positive);
+  --text-warning: var(--breeze-neutral);
+
+  --interactive-normal: var(--breeze-view);
+  --interactive-hover: var(--breeze-hover-soft);
+  --interactive-accent: var(--breeze-highlight);
+  --interactive-accent-hover: #59bdf0;
+
+  --link-color: var(--breeze-link);
+  --link-color-hover: var(--breeze-highlight);
+  --link-external-color: var(--breeze-link);
+  --link-unresolved-color: var(--breeze-visited);
+
+  --color-red: var(--breeze-negative);
+  --color-orange: var(--breeze-neutral);
+  --color-green: var(--breeze-positive);
+  --color-blue: var(--breeze-highlight);
+  --color-purple: var(--breeze-visited);
+
+  --checkbox-color: var(--breeze-highlight);
+  --checkbox-color-hover: #59bdf0;
+
+  /* Ribbon & sidebars */
+  --ribbon-background: var(--breeze-window);
+  --ribbon-background-collapsed: var(--breeze-window);
+  --divider-color: var(--breeze-border);
+
+  /* File explorer / nav items — Dolphin-style selection */
+  --nav-item-background-hover: rgba(61, 174, 233, 0.14);
+  --nav-item-background-active: var(--breeze-selection-soft);
+  --nav-item-background-selected: var(--breeze-selection-soft);
+  --nav-item-color-active: var(--breeze-text);
+  --nav-item-color-selected: var(--breeze-text);
+
+  /* Title bar (used when Obsidian draws its own frame) */
+  --titlebar-background: var(--breeze-titlebar);
+  --titlebar-background-focused: var(--breeze-titlebar);
+  --titlebar-text-color: color-mix(in srgb, var(--breeze-titlebar-text) 70%, transparent);
+  --titlebar-text-color-focused: var(--breeze-titlebar-text);
+  --titlebar-border-color: var(--breeze-titlebar);
+
+  /* Tab bar → the dark Breeze title bar strip */
+  --tab-container-background: var(--breeze-titlebar);
+  --tab-background-active: var(--breeze-view);
+  --tab-text-color: color-mix(in srgb, var(--breeze-titlebar-text) 72%, transparent);
+  --tab-text-color-focused: var(--breeze-titlebar-text);
+  --tab-text-color-active: var(--breeze-text);
+  --tab-text-color-focused-active: var(--breeze-text);
+  --tab-text-color-focused-active-current: var(--breeze-text);
+  --tab-outline-color: var(--breeze-titlebar);
+  --tab-divider-color: rgba(252, 252, 252, 0.18);
+  --tab-radius-active: var(--radius-m) var(--radius-m) 0 0;
+
+  /* Status bar */
+  --status-bar-background: var(--breeze-window);
+  --status-bar-border-color: var(--breeze-border);
+  --status-bar-text-color: var(--breeze-text-inactive);
+
+  /* Misc surfaces */
+  --modal-background: var(--breeze-view);
+  --modal-border-color: var(--breeze-border);
+  --prompt-border-color: var(--breeze-border);
+  --code-background: var(--breeze-window);
+  --blockquote-border-color: var(--breeze-highlight);
+  --hr-color: var(--breeze-border);
+  --table-border-color: var(--breeze-border);
+  --table-header-background: var(--breeze-window);
+  --tag-background: rgba(61, 174, 233, 0.14);
+  --tag-background-hover: rgba(61, 174, 233, 0.24);
+  --tag-color: var(--breeze-link);
+  --scrollbar-thumb-bg: color-mix(in srgb, var(--breeze-text-inactive) 45%, transparent);
+  --scrollbar-active-thumb-bg: var(--breeze-highlight);
+}
+
+/* ---------------------------------------------------------------- */
+/* Top bar: one continuous dark strip across all three panes        */
+/* ---------------------------------------------------------------- */
+
+.workspace-tab-header-container,
+.workspace-split.mod-left-split .workspace-tab-header-container,
+.workspace-split.mod-right-split .workspace-tab-header-container,
+.workspace-ribbon.mod-left::before,
+.titlebar,
+.titlebar-inner,
+.mod-macos .workspace-ribbon.mod-left::before {
+  background-color: var(--breeze-titlebar) !important;
+  border-color: var(--breeze-titlebar) !important;
+}
+
+/* Remove the seams between panes inside the top bar */
+.workspace-tab-header-container {
+  border-bottom: none;
+  --icon-color: color-mix(in srgb, var(--breeze-titlebar-text) 75%, transparent);
+  --icon-color-hover: var(--breeze-titlebar-text);
+  --icon-color-active: var(--breeze-titlebar-text);
+  --icon-color-focused: var(--breeze-titlebar-text);
+  --background-modifier-hover: rgba(252, 252, 252, 0.12);
+}
+
+.workspace-split.mod-left-split,
+.workspace-split.mod-right-split {
+  border-color: var(--breeze-border);
+}
+
+.workspace-split.mod-left-split > .workspace-leaf-resize-handle,
+.workspace-split.mod-right-split > .workspace-leaf-resize-handle {
+  border-color: var(--breeze-border);
+}
+
+/* Inactive tabs in the main area: light text on the dark strip */
+.workspace-split.mod-root .workspace-tab-header:not(.is-active):hover {
+  background-color: rgba(252, 252, 252, 0.1);
+  border-radius: var(--radius-m) var(--radius-m) 0 0;
+}
+
+/* Active tab in the main area: Breeze view white, dark icons/text (like Firefox's active tab) */
+.workspace-split.mod-root .workspace-tab-header.is-active {
+  --icon-color: var(--breeze-text-inactive);
+  --icon-color-hover: var(--breeze-text);
+  --background-modifier-hover: rgba(61, 174, 233, 0.14);
+}
+
+/* Sidebar tab icons: subtle highlight on the active one */
+.workspace-split.mod-left-split .workspace-tab-header.is-active,
+.workspace-split.mod-right-split .workspace-tab-header.is-active {
+  background-color: rgba(252, 252, 252, 0.16);
+  border-radius: var(--radius-m);
+  box-shadow: none;
+}
+
+.workspace-split.mod-left-split .workspace-tab-header:hover,
+.workspace-split.mod-right-split .workspace-tab-header:hover {
+  background-color: rgba(252, 252, 252, 0.1);
+  border-radius: var(--radius-m);
+}
+
+.workspace-tab-header-container .workspace-tab-header-inner-icon,
+.workspace-split.mod-left-split .workspace-tab-header .workspace-tab-header-inner-icon,
+.workspace-split.mod-right-split .workspace-tab-header .workspace-tab-header-inner-icon {
+  color: var(--icon-color);
+}
+
+.workspace-split.mod-left-split .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
+.workspace-split.mod-right-split .workspace-tab-header.is-active .workspace-tab-header-inner-icon {
+  color: var(--breeze-titlebar-text);
+}
+
+/* Window controls (hidden-frame mode on Linux / Windows) */
+.titlebar-button-container,
+.titlebar-button-container.mod-right {
+  background-color: var(--breeze-titlebar);
+}
+
+.titlebar-button {
+  color: var(--breeze-titlebar-text);
+}
+
+.titlebar-button:hover {
+  background-color: rgba(252, 252, 252, 0.14);
+}
+
+.titlebar-button.mod-close:hover {
+  background-color: var(--breeze-negative);
+  color: #fcfcfc;
+}
+
+/* ---------------------------------------------------------------- */
+/* Sidebars                                                         */
+/* ---------------------------------------------------------------- */
+
+.workspace-split.mod-left-split .workspace-leaf-content,
+.workspace-split.mod-right-split .workspace-leaf-content,
+.workspace-split.mod-left-split .view-content,
+.workspace-split.mod-right-split .view-content,
+.workspace-split.mod-left-split .nav-header,
+.workspace-split.mod-right-split .nav-header,
+.workspace-split.mod-left-split .view-header,
+.workspace-split.mod-right-split .view-header,
+.workspace-sidedock-vault-profile {
+  background-color: var(--breeze-window);
+}
+
+/* Dolphin-style selected item: soft blue fill with a highlight outline */
+.nav-file-title.is-active,
+.nav-folder-title.is-active,
+.tree-item-self.is-active {
+  background-color: var(--breeze-selection-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--breeze-highlight) 55%, transparent);
+  border-radius: var(--radius-s);
+}
+
+/* ---------------------------------------------------------------- */
+/* Main content                                                     */
+/* ---------------------------------------------------------------- */
+
+.workspace-split.mod-root .view-header,
+.workspace-split.mod-root .workspace-leaf-content,
+.workspace-split.mod-root .view-content {
+  background-color: var(--breeze-view);
+}
+
+.workspace-split.mod-root .view-header {
+  border-bottom: 1px solid var(--breeze-border);
+}
+
+/* ---------------------------------------------------------------- */
+/* Controls                                                         */
+/* ---------------------------------------------------------------- */
+
+button:not(.clickable-icon),
+.dropdown,
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+  border-radius: var(--radius-s);
+}
+
+button:not(.clickable-icon):not(.mod-cta):not(.mod-warning) {
+  background-color: var(--interactive-normal);
+  border: 1px solid var(--breeze-border);
+  box-shadow: none;
+}
+
+button:not(.clickable-icon):not(.mod-cta):not(.mod-warning):hover {
+  border-color: var(--breeze-highlight);
+  background-color: var(--interactive-hover);
+}
+
+input:focus,
+textarea:focus,
+.dropdown:focus {
+  border-color: var(--breeze-highlight);
+  box-shadow: 0 0 0 1px var(--breeze-highlight);
+}
+
+.checkbox-container.is-enabled {
+  background-color: var(--breeze-highlight);
+}
+
+/* Status bar: a Dolphin-like rounded pill */
+.status-bar {
+  border-top-left-radius: var(--radius-m);
+}
