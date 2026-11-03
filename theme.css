@@ -139,7 +139,6 @@ body {
   --tab-text-color-focused-active-current: var(--breeze-text);
   --tab-outline-color: var(--breeze-titlebar);
   --tab-divider-color: rgba(252, 252, 252, 0.18);
-  --tab-radius-active: var(--radius-m) var(--radius-m) 0 0;
 
   /* Status bar */
   --status-bar-background: var(--breeze-window);
@@ -197,31 +196,25 @@ body {
   border-color: var(--breeze-border);
 }
 
-/* Inactive tabs in the main area: light text on the dark strip */
-.workspace-split.mod-root .workspace-tab-header:not(.is-active):hover {
-  background-color: rgba(252, 252, 252, 0.1);
-  border-radius: var(--radius-m) var(--radius-m) 0 0;
+/* Tabs keep Obsidian's default shape (rounded top, curved feet).
+   Only colours change: the strip stays Breeze title-bar grey and the
+   active tab is Breeze view white, like the active tab in Firefox. */
+.workspace-split.mod-root .workspace-tab-header:not(.is-active) {
+  --tab-text-color: color-mix(in srgb, var(--breeze-titlebar-text) 72%, transparent);
+  --tab-text-color-focused: color-mix(in srgb, var(--breeze-titlebar-text) 85%, transparent);
 }
 
-/* Active tab in the main area: Breeze view white, dark icons/text (like Firefox's active tab) */
 .workspace-split.mod-root .workspace-tab-header.is-active {
   --icon-color: var(--breeze-text-inactive);
   --icon-color-hover: var(--breeze-text);
   --background-modifier-hover: rgba(61, 174, 233, 0.14);
+  color: var(--breeze-text);
 }
 
 /* Sidebar tab icons: subtle highlight on the active one */
-.workspace-split.mod-left-split .workspace-tab-header.is-active,
-.workspace-split.mod-right-split .workspace-tab-header.is-active {
+.workspace-split.mod-left-split .workspace-tab-header.is-active .workspace-tab-header-inner,
+.workspace-split.mod-right-split .workspace-tab-header.is-active .workspace-tab-header-inner {
   background-color: rgba(252, 252, 252, 0.16);
-  border-radius: var(--radius-m);
-  box-shadow: none;
-}
-
-.workspace-split.mod-left-split .workspace-tab-header:hover,
-.workspace-split.mod-right-split .workspace-tab-header:hover {
-  background-color: rgba(252, 252, 252, 0.1);
-  border-radius: var(--radius-m);
 }
 
 .workspace-tab-header-container .workspace-tab-header-inner-icon,
@@ -287,10 +280,6 @@ body {
 .workspace-split.mod-root .workspace-leaf-content,
 .workspace-split.mod-root .view-content {
   background-color: var(--breeze-view);
-}
-
-.workspace-split.mod-root .view-header {
-  border-bottom: 1px solid var(--breeze-border);
 }
 
 /* ---------------------------------------------------------------- */
