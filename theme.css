@@ -436,3 +436,36 @@ textarea:focus,
 .status-bar {
   border-top-left-radius: var(--radius-m);
 }
+
+/* ---------------------------------------------------------------- */
+/* Plugin: Daily Note Navbar                                        */
+/* ---------------------------------------------------------------- */
+
+/* The general Breeze button style above (white fill + border) outranks the
+   plugin's own flat buttons, which hid the selected day's white text.
+   Restore the plugin's flat look; colours come from the Breeze palette via
+   --interactive-hover / --interactive-accent. */
+.workspace-leaf .daily-note-navbar button:not(.clickable-icon) {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  border-radius: var(--radius-s);
+}
+
+.workspace-leaf .daily-note-navbar button:not(.clickable-icon):hover {
+  background: var(--interactive-hover);
+}
+
+.workspace-leaf .daily-note-navbar button.daily-note-navbar__active:not(.clickable-icon) {
+  color: var(--text-on-accent);
+  background: var(--interactive-accent);
+}
+
+.workspace-leaf .daily-note-navbar button.daily-note-navbar__active:not(.clickable-icon):hover {
+  color: var(--text-on-accent);
+  background: var(--interactive-accent-hover);
+}
+
+.workspace-leaf .daily-note-navbar .daily-note-navbar__not-exists {
+  color: color-mix(in srgb, var(--breeze-text-inactive) 65%, transparent) !important;
+}
