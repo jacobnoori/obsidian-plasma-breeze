@@ -16,7 +16,7 @@ Headings and inline text use colours from the Breeze palette, deepened in light 
 | --- | --- |
 | H1 / H2 / H3 | Blue / teal / purple |
 | H4 / H5 / H6 | Red / slate / grey |
-| **Bold** / *italic* | Orange / green |
+| *Italic* | Green (bold stays the normal text colour) |
 | `inline code` | Purple |
 
 Fonts default to **Noto Sans** and **Hack** (Plasma's defaults) when installed.

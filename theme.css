@@ -43,7 +43,6 @@ body,
   --breeze-h4: #da4453; /* red    */
   --breeze-h5: #475057; /* slate  */
   --breeze-h6: #707d8a; /* grey   */
-  --breeze-bold: #a85300;   /* deep Breeze orange */
   --breeze-italic: #1e7d45; /* deep Breeze green  */
   --breeze-code: #8e44ad;   /* purple */
 
@@ -88,7 +87,6 @@ body,
   --breeze-h4: #da4453; /* red    */
   --breeze-h5: #bdc3c7; /* slate  */
   --breeze-h6: #a1a9b1; /* grey   */
-  --breeze-bold: #f67400;   /* Breeze orange */
   --breeze-italic: #27ae60; /* Breeze green  */
   --breeze-code: #b07cd0;   /* purple */
 }
@@ -167,7 +165,6 @@ body,
   --h4-color: var(--breeze-h4);
   --h5-color: var(--breeze-h5);
   --h6-color: var(--breeze-h6);
-  --bold-color: var(--breeze-bold);
   --italic-color: var(--breeze-italic);
   --list-marker-color: var(--breeze-highlight);
   --list-marker-color-hover: var(--breeze-link);
