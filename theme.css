@@ -11,24 +11,41 @@
 /* Palette                                                          */
 /* ---------------------------------------------------------------- */
 
-body {
+/* The light palette is declared on .theme-light as well as body, so a
+   .theme-light element nested inside a dark body still gets light colours. */
+body,
+.theme-light {
   /* Breeze (light) */
   --breeze-titlebar: #475057;
   --breeze-titlebar-text: #fcfcfc;
   --breeze-window: #eff0f1;
   --breeze-view: #fcfcfc;
   --breeze-alt-view: #f7f7f7;
+  --breeze-button: #fcfcfc;
+  --breeze-tab-active: var(--breeze-view);
+  --breeze-tab-shadow: rgba(0, 0, 0, 0.25);
   --breeze-text: #232629;
   --breeze-text-inactive: #707d8a;
   --breeze-border: #c6c8c9;
   --breeze-highlight: #3daee9;
   --breeze-selection-soft: #c2e0f5; /* Dolphin selected item */
-  --breeze-hover-soft: #dcedf8;
   --breeze-link: #2980b9;
   --breeze-visited: #9b59b6;
   --breeze-negative: #da4453;
   --breeze-neutral: #f67400;
   --breeze-positive: #27ae60;
+
+  /* Text colours from the Breeze palette, darkened where needed to stay
+     readable on the near-white view background. */
+  --breeze-h1: #2980b9; /* blue   */
+  --breeze-h2: #12806a; /* teal   */
+  --breeze-h3: #8e44ad; /* purple */
+  --breeze-h4: #da4453; /* red    */
+  --breeze-h5: #475057; /* slate  */
+  --breeze-h6: #707d8a; /* grey   */
+  --breeze-bold: #a85300;   /* deep Breeze orange */
+  --breeze-italic: #1e7d45; /* deep Breeze green  */
+  --breeze-code: #8e44ad;   /* purple */
 
   --font-interface-theme: "Noto Sans", "Inter", "Segoe UI", sans-serif;
   --font-text-theme: "Noto Sans", "Inter", "Segoe UI", sans-serif;
@@ -39,6 +56,9 @@ body {
   --radius-l: 7px;
   --radius-xl: 9px;
 
+  /* Obsidian derives some colours from HSL accent parts. CSS can't split a
+     hex colour into H/S/L, so keep these in sync with --breeze-highlight
+     (#3daee9 ≈ hsl(200 79% 58%)) by hand. */
   --accent-h: 200;
   --accent-s: 80%;
   --accent-l: 58%;
@@ -51,13 +71,26 @@ body {
   --breeze-window: #202326;
   --breeze-view: #141618;
   --breeze-alt-view: #1d1f22;
+  --breeze-button: #292c30;
+  /* Lighter than the strip so the active tab lifts out of it, like Firefox. */
+  --breeze-tab-active: #40464c;
+  --breeze-tab-shadow: rgba(0, 0, 0, 0.45);
   --breeze-text: #fcfcfc;
   --breeze-text-inactive: #a1a9b1;
   --breeze-border: #3b4045;
   --breeze-selection-soft: #1f4a62;
-  --breeze-hover-soft: #1b3646;
   --breeze-link: #1d99f3;
   --breeze-visited: #9b59b6;
+
+  --breeze-h1: #3daee9; /* blue   */
+  --breeze-h2: #1abc9c; /* teal   */
+  --breeze-h3: #b07cd0; /* purple */
+  --breeze-h4: #da4453; /* red    */
+  --breeze-h5: #bdc3c7; /* slate  */
+  --breeze-h6: #a1a9b1; /* grey   */
+  --breeze-bold: #f67400;   /* Breeze orange */
+  --breeze-italic: #27ae60; /* Breeze green  */
+  --breeze-code: #b07cd0;   /* purple */
 }
 
 /* ---------------------------------------------------------------- */
@@ -66,6 +99,16 @@ body {
 
 .theme-light,
 .theme-dark {
+  /* Derived tints, computed here so they follow the active palette. */
+  --breeze-highlight-soft: color-mix(in srgb, var(--breeze-highlight) 14%, transparent);
+  --breeze-highlight-medium: color-mix(in srgb, var(--breeze-highlight) 22%, transparent);
+  /* A deeper Breeze blue for filled accent surfaces (CTA buttons, checkboxes)
+     so white text on them meets WCAG AA (~4.6:1). */
+  --breeze-accent-strong: color-mix(in srgb, var(--breeze-highlight) 70%, black);
+  --breeze-accent-strong-hover: color-mix(in srgb, var(--breeze-highlight) 62%, black);
+  --breeze-on-titlebar-hover: color-mix(in srgb, var(--breeze-titlebar-text) 12%, transparent);
+  --breeze-on-titlebar-muted: color-mix(in srgb, var(--breeze-titlebar-text) 72%, transparent);
+
   --background-primary: var(--breeze-view);
   --background-primary-alt: var(--breeze-alt-view);
   --background-secondary: var(--breeze-window);
@@ -74,8 +117,8 @@ body {
   --background-modifier-border: var(--breeze-border);
   --background-modifier-border-hover: var(--breeze-highlight);
   --background-modifier-border-focus: var(--breeze-highlight);
-  --background-modifier-hover: rgba(61, 174, 233, 0.14);
-  --background-modifier-active-hover: rgba(61, 174, 233, 0.22);
+  --background-modifier-hover: var(--breeze-highlight-soft);
+  --background-modifier-active-hover: var(--breeze-highlight-medium);
   --background-modifier-error: var(--breeze-negative);
   --background-modifier-success: var(--breeze-positive);
 
@@ -85,16 +128,23 @@ body {
   --text-accent: var(--breeze-link);
   --text-accent-hover: var(--breeze-highlight);
   --text-on-accent: #fcfcfc;
-  --text-selection: rgba(61, 174, 233, 0.3);
-  --text-highlight-bg: rgba(246, 116, 0, 0.25);
+  --text-selection: color-mix(in srgb, var(--breeze-highlight) 30%, transparent);
+  --text-highlight-bg: color-mix(in srgb, var(--breeze-neutral) 25%, transparent);
   --text-error: var(--breeze-negative);
   --text-success: var(--breeze-positive);
   --text-warning: var(--breeze-neutral);
 
-  --interactive-normal: var(--breeze-view);
-  --interactive-hover: var(--breeze-hover-soft);
-  --interactive-accent: var(--breeze-highlight);
-  --interactive-accent-hover: #59bdf0;
+  /* Buttons and inputs: Obsidian draws their border with --input-shadow, so
+     styling through variables (instead of a global button selector) leaves
+     plugins' own button styles intact. */
+  --interactive-normal: var(--breeze-button);
+  --interactive-hover: color-mix(in srgb, var(--breeze-button) 82%, var(--breeze-highlight));
+  --interactive-accent: var(--breeze-accent-strong);
+  --interactive-accent-hover: var(--breeze-accent-strong-hover);
+  --input-shadow: inset 0 0 0 1px var(--breeze-border);
+  --input-shadow-hover: inset 0 0 0 1px var(--breeze-highlight);
+  --button-radius: var(--radius-s);
+  --input-radius: var(--radius-s);
 
   --link-color: var(--breeze-link);
   --link-color-hover: var(--breeze-highlight);
@@ -107,8 +157,20 @@ body {
   --color-blue: var(--breeze-highlight);
   --color-purple: var(--breeze-visited);
 
-  --checkbox-color: var(--breeze-highlight);
-  --checkbox-color-hover: #59bdf0;
+  --checkbox-color: var(--breeze-accent-strong);
+  --checkbox-color-hover: var(--breeze-accent-strong-hover);
+
+  /* Headings and inline text */
+  --h1-color: var(--breeze-h1);
+  --h2-color: var(--breeze-h2);
+  --h3-color: var(--breeze-h3);
+  --h4-color: var(--breeze-h4);
+  --h5-color: var(--breeze-h5);
+  --h6-color: var(--breeze-h6);
+  --bold-color: var(--breeze-bold);
+  --italic-color: var(--breeze-italic);
+  --list-marker-color: var(--breeze-highlight);
+  --list-marker-color-hover: var(--breeze-link);
 
   /* Ribbon & sidebars */
   --ribbon-background: var(--breeze-window);
@@ -116,7 +178,7 @@ body {
   --divider-color: var(--breeze-border);
 
   /* File explorer / nav items — Dolphin-style selection */
-  --nav-item-background-hover: rgba(61, 174, 233, 0.14);
+  --nav-item-background-hover: var(--breeze-highlight-soft);
   --nav-item-background-active: var(--breeze-selection-soft);
   --nav-item-background-selected: var(--breeze-selection-soft);
   --nav-item-color: var(--breeze-text);
@@ -133,14 +195,14 @@ body {
 
   /* Tab bar → the dark Breeze title bar strip */
   --tab-container-background: var(--breeze-titlebar);
-  --tab-background-active: var(--breeze-view);
-  --tab-text-color: color-mix(in srgb, var(--breeze-titlebar-text) 72%, transparent);
+  --tab-background-active: var(--breeze-tab-active);
+  --tab-text-color: var(--breeze-on-titlebar-muted);
   --tab-text-color-focused: var(--breeze-titlebar-text);
   --tab-text-color-active: var(--breeze-text);
   --tab-text-color-focused-active: var(--breeze-text);
   --tab-text-color-focused-active-current: var(--breeze-text);
   --tab-outline-color: var(--breeze-titlebar);
-  --tab-divider-color: rgba(252, 252, 252, 0.18);
+  --tab-divider-color: color-mix(in srgb, var(--breeze-titlebar-text) 18%, transparent);
   /* Firefox-style tabs: no flared "feet", fully rounded corners. */
   --tab-curve: 0px;
   --tab-radius-active: var(--radius-m);
@@ -159,11 +221,17 @@ body {
   --hr-color: var(--breeze-border);
   --table-border-color: var(--breeze-border);
   --table-header-background: var(--breeze-window);
-  --tag-background: rgba(61, 174, 233, 0.14);
-  --tag-background-hover: rgba(61, 174, 233, 0.24);
+  --tag-background: var(--breeze-highlight-soft);
+  --tag-background-hover: color-mix(in srgb, var(--breeze-highlight) 24%, transparent);
   --tag-color: var(--breeze-link);
   --scrollbar-thumb-bg: color-mix(in srgb, var(--breeze-text-inactive) 45%, transparent);
   --scrollbar-active-thumb-bg: var(--breeze-highlight);
+}
+
+/* Inline code (not code blocks) in reading view and the editor */
+.markdown-rendered :not(pre) > code,
+.cm-s-obsidian span.cm-inline-code:not(.cm-formatting-code) {
+  color: var(--breeze-code);
 }
 
 /* ---------------------------------------------------------------- */
@@ -186,7 +254,7 @@ body {
   --icon-color-hover: var(--breeze-titlebar-text);
   --icon-color-active: var(--breeze-titlebar-text);
   --icon-color-focused: var(--breeze-titlebar-text);
-  --background-modifier-hover: rgba(252, 252, 252, 0.12);
+  --background-modifier-hover: var(--breeze-on-titlebar-hover);
 }
 
 .workspace-split.mod-left-split,
@@ -201,7 +269,7 @@ body {
 
 /* Firefox-style tabs in the main pane: each tab is a rounded card floating
    in the middle of the dark strip (4px gap above and below). The active
-   tab is white with a soft shadow; inactive tabs have no background, no
+   tab is raised with a soft shadow; inactive tabs have no background, no
    dividers and show their close button, like Firefox. */
 .workspace .mod-root .workspace-tab-header-container-inner {
   margin: 0 -2px;
@@ -223,11 +291,11 @@ body {
 }
 
 .workspace .mod-root .workspace-tab-header-container .workspace-tab-header.is-active {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 3px var(--breeze-tab-shadow);
 }
 
 .workspace .mod-root .workspace-tab-header-container .workspace-tab-header:not(.is-active):hover {
-  background-color: rgba(252, 252, 252, 0.1);
+  background-color: color-mix(in srgb, var(--breeze-titlebar-text) 10%, transparent);
   box-shadow: none;
 }
 
@@ -253,26 +321,30 @@ body {
 
 .workspace .mod-root .workspace-tab-header:not(.is-active) .workspace-tab-header-inner-close-button:hover {
   color: var(--breeze-titlebar-text);
-  background-color: rgba(252, 252, 252, 0.12);
+  background-color: var(--breeze-on-titlebar-hover);
 }
 
 .workspace-split.mod-root .workspace-tab-header:not(.is-active) {
-  --tab-text-color: color-mix(in srgb, var(--breeze-titlebar-text) 72%, transparent);
+  --tab-text-color: var(--breeze-on-titlebar-muted);
   --tab-text-color-focused: color-mix(in srgb, var(--breeze-titlebar-text) 85%, transparent);
 }
 
 .workspace-split.mod-root .workspace-tab-header.is-active {
   --icon-color: var(--breeze-text-inactive);
   --icon-color-hover: var(--breeze-text);
-  --background-modifier-hover: rgba(61, 174, 233, 0.14);
+  --background-modifier-hover: var(--breeze-highlight-soft);
   color: var(--breeze-text);
+}
+
+/* Tab icons follow --icon-color, which is light on the dark strip. */
+.workspace-tab-header-container .workspace-tab-header-inner-icon {
+  color: var(--icon-color);
 }
 
 /* Sidebar tab icons sit on the dark strip, so every tab-text state there
    (including "focused + active", used when you click into a sidebar) must
-   stay light. The main pane keeps dark text on its white active tab. */
-.workspace-split.mod-left-split .workspace-tab-header,
-.workspace-split.mod-right-split .workspace-tab-header {
+   stay light. The main pane keeps dark text on its light active tab. */
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header {
   --tab-text-color-active: var(--breeze-titlebar-text);
   --tab-text-color-focused-active: var(--breeze-titlebar-text);
   --tab-text-color-focused-active-current: var(--breeze-titlebar-text);
@@ -280,28 +352,15 @@ body {
   --icon-color-focused: var(--breeze-titlebar-text);
 }
 
-.workspace-split.mod-left-split .workspace-tabs.mod-active .workspace-tab-header.is-active,
-.workspace-split.mod-right-split .workspace-tabs.mod-active .workspace-tab-header.is-active,
-.workspace-split.mod-left-split .workspace-tabs.mod-active .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
-.workspace-split.mod-right-split .workspace-tabs.mod-active .workspace-tab-header.is-active .workspace-tab-header-inner-icon {
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tabs.mod-active .workspace-tab-header.is-active,
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tabs.mod-active .workspace-tab-header.is-active .workspace-tab-header-inner-icon {
   color: var(--breeze-titlebar-text);
 }
 
-/* Sidebar tab icons: subtle highlight on the active one */
-.workspace-split.mod-left-split .workspace-tab-header.is-active .workspace-tab-header-inner,
-.workspace-split.mod-right-split .workspace-tab-header.is-active .workspace-tab-header-inner {
-  background-color: rgba(252, 252, 252, 0.16);
-}
-
-.workspace-tab-header-container .workspace-tab-header-inner-icon,
-.workspace-split.mod-left-split .workspace-tab-header .workspace-tab-header-inner-icon,
-.workspace-split.mod-right-split .workspace-tab-header .workspace-tab-header-inner-icon {
-  color: var(--icon-color);
-}
-
-.workspace-split.mod-left-split .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
-.workspace-split.mod-right-split .workspace-tab-header.is-active .workspace-tab-header-inner-icon {
-  color: var(--breeze-titlebar-text);
+/* Subtle highlight behind the active sidebar tab icon */
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active .workspace-tab-header-inner {
+  background-color: color-mix(in srgb, var(--breeze-titlebar-text) 16%, transparent);
 }
 
 /* Window controls (hidden-frame mode on Linux / Windows).
@@ -318,7 +377,7 @@ body {
 }
 
 .titlebar-button:hover {
-  background-color: rgba(252, 252, 252, 0.14);
+  background-color: color-mix(in srgb, var(--breeze-titlebar-text) 14%, transparent);
 }
 
 .titlebar-button.mod-close:hover {
@@ -377,7 +436,7 @@ body {
   --icon-color-hover: var(--breeze-titlebar-text);
   --icon-color-active: var(--breeze-titlebar-text);
   --icon-color-focused: var(--breeze-titlebar-text);
-  --background-modifier-hover: rgba(252, 252, 252, 0.12);
+  --background-modifier-hover: var(--breeze-on-titlebar-hover);
 }
 
 .pane-empty,
@@ -399,27 +458,7 @@ body {
 /* Controls                                                         */
 /* ---------------------------------------------------------------- */
 
-button:not(.clickable-icon),
-.dropdown,
-input[type="text"],
-input[type="search"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-textarea {
-  border-radius: var(--radius-s);
-}
-
-button:not(.clickable-icon):not(.mod-cta):not(.mod-warning) {
-  background-color: var(--interactive-normal);
-  border: 1px solid var(--breeze-border);
-  box-shadow: none;
-}
-
-button:not(.clickable-icon):not(.mod-cta):not(.mod-warning):hover {
-  border-color: var(--breeze-highlight);
-  background-color: var(--interactive-hover);
-}
+/* Button and input shapes/borders come from the variables above. */
 
 input:focus,
 textarea:focus,
@@ -441,9 +480,7 @@ textarea:focus,
 /* Plugin: Daily Note Navbar                                        */
 /* ---------------------------------------------------------------- */
 
-/* The general Breeze button style above (white fill + border) outranks the
-   plugin's own flat buttons, which hid the selected day's white text.
-   Restore the plugin's flat look; colours come from the Breeze palette via
+/* Keep the plugin's flat buttons; colours come from the Breeze palette via
    --interactive-hover / --interactive-accent. */
 .workspace-leaf .daily-note-navbar button:not(.clickable-icon) {
   background: transparent;

@@ -10,6 +10,15 @@ An Obsidian theme that matches KDE Plasma's **Breeze** colour scheme, so Obsidia
 | Accent / focus | Highlight | `#3daee9` | `#3daee9` |
 | Selected file | Dolphin selection | `#c2e0f5` | `#1f4a62` |
 
+Headings and inline text use colours from the Breeze palette, deepened in light mode so they stay readable:
+
+| Element | Colour |
+| --- | --- |
+| H1 / H2 / H3 | Blue / teal / purple |
+| H4 / H5 / H6 | Red / slate / grey |
+| **Bold** / *italic* | Orange / green |
+| `inline code` | Purple |
+
 Fonts default to **Noto Sans** and **Hack** (Plasma's defaults) when installed.
 
 ## Install manually
